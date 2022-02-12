@@ -1,10 +1,9 @@
-defmodule VulnerableApiWeb.GraphQL.Types.PostTypes do
+defmodule VulnerableApiWeb.GraphQL.Types.CommentTypes do
   use Absinthe.Schema.Notation
 
-  object :post do
+  object :comment do
     field :id, :string
     field :content, :string
     field :user, :user
-    field :comments, list_of(:comment)
   end
 end

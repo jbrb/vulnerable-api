@@ -3,6 +3,10 @@ defmodule VulnerableApi.Comments do
   alias VulnerableApi.Comments.Comment
   alias VulnerableApi.Repo
 
+  def get_comment(comment_id) do
+    Repo.get_by(Comment, comment_id: comment_id)
+  end
+
   def create_comment(attrs) do
     %Comment{user_id: attrs.user_id, post_id: attrs.post_id}
     |> Comment.changeset(attrs)
