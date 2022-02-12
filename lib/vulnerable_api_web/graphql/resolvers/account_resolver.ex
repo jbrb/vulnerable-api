@@ -5,6 +5,10 @@ defmodule VulnerableApiWeb.GraphQL.Resolvers.AccountResolver do
     args
   end
 
+  def list_users(_, _) do
+    {:ok, Accounts.list_users()}
+  end
+
   def get_user(%{user_id: user_id}, _) do
     {:ok, Accounts.get_user(user_id)}
   end

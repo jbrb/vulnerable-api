@@ -1,4 +1,6 @@
 defmodule VulnerableApi.Posts do
+  import Ecto.Query
+
   alias VulnerableApi.Posts.Post
   alias VulnerableApi.Repo
 
@@ -10,6 +12,13 @@ defmodule VulnerableApi.Posts do
 
   def list_posts do
     Repo.all(Post)
+  end
+
+  def list_user_posts(user_id, preload \\ []) do
+    Post
+    |> where(user_id: ^user_id)
+    |> preload(^preload)
+    |> Repo.all()
   end
 
   def get_post(id), do: Repo.get(Post, id)

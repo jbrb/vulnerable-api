@@ -32,7 +32,7 @@ defmodule VulnerableApiWeb.GraphQL.Mutations.AccountMutations do
       arg :full_name, non_null(:string)
       arg :address, non_null(:string)
 
-      resolve(&AccountResolver.update_profile/2)
+      resolve(&AccountResolver.update_user/2)
     end
 
     @desc "Delete User"

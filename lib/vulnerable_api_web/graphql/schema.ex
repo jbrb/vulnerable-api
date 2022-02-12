@@ -5,30 +5,39 @@ defmodule VulnerableApiWeb.GraphQL.Schema do
   use Absinthe.Schema
 
   alias VulnerableApiWeb.GraphQL.Mutations.{
-    AccountMutations
+    AccountMutations,
+    PostMutations
   }
 
-  alias VulnerableApiWeb.GraphQL.Queries.AccountQueries
+  alias VulnerableApiWeb.GraphQL.Queries.{
+    AccountQueries,
+    PostQueries
+  }
 
   alias VulnerableApiWeb.GraphQL.Types.{
-    AccountTypes
+    AccountTypes,
+    PostTypes
   }
-
 
   # Types imports
   import_types(AccountTypes)
+  import_types(PostTypes)
 
   # Queries imports
   import_types(AccountQueries)
+  import_types(PostQueries)
 
   # Mutations imports
   import_types(AccountMutations)
+  import_types(PostMutations)
 
   query do
     import_fields(:account_queries)
+    import_fields(:post_queries)
   end
 
   mutation do
     import_fields(:account_mutations)
+    import_fields(:post_mutations)
   end
 end
