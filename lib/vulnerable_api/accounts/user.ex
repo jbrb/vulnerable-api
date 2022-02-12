@@ -34,6 +34,7 @@ defmodule VulnerableApi.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, @attrs)
+    |> validate_required([:full_name, :address, :email, :password])
     |> hash_password()
   end
 
