@@ -17,4 +17,8 @@ defmodule VulnerableApi.Accounts do
   end
 
   def delete_user(user), do: Repo.delete(user)
+
+  def authenticate(user, password) do
+    Bcrypt.verify_pass(password, user.password_hash)
+  end
 end

@@ -8,7 +8,7 @@ defmodule VulnerableApi.Accounts.User do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
-  @attrs ~w(email full_name address government_id role status credits is_private)a
+  @attrs ~w(email full_name address government_id role status credits is_private password)a
 
   schema "users" do
     field :email, :string
@@ -31,6 +31,14 @@ defmodule VulnerableApi.Accounts.User do
   end
 
   def changeset(user, attrs) do
-    cast(user, attrs, @attrs)
+    user
+    |> cast(attrs, @attrs)
+    |> hash_password()
   end
+
+  defp hash_password(%{valid?: true, changes: %{password: password}} = changeset) do
+    put_change(changeset, :password_hash, Bcrypt.hash_pwd_salt(password))
+  end
+
+  defp hash_password(changeset), do: changeset
 end
