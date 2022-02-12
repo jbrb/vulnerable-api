@@ -6,7 +6,7 @@ defmodule VulnerableApiWeb.Router do
   end
 
   pipeline :graphql do
-    # plug Guardian here
+    plug VulnerableApiWeb.Plugs.Context
   end
 
   scope "/api" do
@@ -16,6 +16,7 @@ defmodule VulnerableApiWeb.Router do
       forward "/graphiql", Absinthe.Plug.GraphiQL, schema: VulnerableApiWeb.GraphQL.Schema
     end
 
+    pipe_through :graphql
     forward "/graphql", Absinthe.Plug, schema: VulnerableApiWeb.GraphQL.Schema
   end
 

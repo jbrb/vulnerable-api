@@ -9,6 +9,12 @@ config :vulnerable_api, VulnerableApi.Repo,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+config :vulnerable_api, VulnerableApi.Guardian,
+  issuer: "vulnerable_api",
+  secret_key:
+    System.get_env("GUARDIAN_SECRET_KEY") ||
+      "JuGXNRQr7K5vHll02aYQRkUI+HXPWNMJsYLB1uyoMgzbaHV+l/AEGSecMHR0cu4F"
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #

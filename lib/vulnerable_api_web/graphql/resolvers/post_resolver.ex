@@ -2,7 +2,7 @@ defmodule VulnerableApiWeb.GraphQL.Resolvers.PostResolver do
   alias VulnerableApi.Posts
 
   def list_posts(%{user_id: user_id}, _) do
-    {:ok, Posts.list_user_posts(user_id, [comments: :user])}
+    {:ok, Posts.list_user_posts(user_id, comments: :user)}
   end
 
   def create_post(args, _) do

@@ -12,7 +12,6 @@ defmodule VulnerableApi.Repo.Migrations.CreateUsersTable do
       add :password_hash, :string
       add :role, :string
       add :status, :string
-      add :credits, :integer
       add :is_private, :boolean, default: false
 
       timestamps()

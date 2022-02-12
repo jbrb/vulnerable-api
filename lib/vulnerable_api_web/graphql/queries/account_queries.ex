@@ -13,14 +13,14 @@ defmodule VulnerableApiWeb.GraphQL.Queries.AccountQueries do
 
     @desc "Get User"
     field :get_user, :user do
-      arg :user_id, :string
+      arg(:user_id, :string)
 
       resolve(&AccountResolver.get_user/2)
     end
 
     @desc "View Profile"
     field :view_profile, :user do
-      arg :user_id, :string
+      arg(:user_id, :string)
 
       resolve(&AccountResolver.get_user/2)
     end

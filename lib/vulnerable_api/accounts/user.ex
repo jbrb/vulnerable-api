@@ -2,13 +2,14 @@ defmodule VulnerableApi.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias VulnerableApi.Accounts.Credit
   alias VulnerableApi.Comments.Comment
   alias VulnerableApi.Posts.Post
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
-  @attrs ~w(email full_name address government_id role status credits is_private password)a
+  @attrs ~w(email full_name address government_id role status is_private password)a
 
   schema "users" do
     field :email, :string
@@ -19,13 +20,13 @@ defmodule VulnerableApi.Accounts.User do
     field :password_hash, :string
     field :role, :string
     field :status, :string
-    field :credits, :integer
     field :is_private, :boolean, default: false
 
     field :password, :string, virtual: true
 
     has_many :posts, Post
     has_many :users, Comment
+    has_many :credits, Credit
 
     timestamps()
   end

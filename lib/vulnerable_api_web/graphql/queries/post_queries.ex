@@ -8,7 +8,7 @@ defmodule VulnerableApiWeb.GraphQL.Queries.PostQueries do
   object :post_queries do
     @desc "Create Post"
     field :list_posts, list_of(:post) do
-      arg :user_id, :string
+      arg(:user_id, :string)
 
       resolve(&PostResolver.list_posts/2)
     end
