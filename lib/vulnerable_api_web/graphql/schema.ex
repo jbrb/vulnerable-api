@@ -6,6 +6,7 @@ defmodule VulnerableApiWeb.GraphQL.Schema do
 
   alias VulnerableApiWeb.GraphQL.Mutations.{
     AccountMutations,
+    CommentMutations,
     PostMutations
   }
 
@@ -16,11 +17,13 @@ defmodule VulnerableApiWeb.GraphQL.Schema do
 
   alias VulnerableApiWeb.GraphQL.Types.{
     AccountTypes,
+    CommentTypes,
     PostTypes
   }
 
   # Types imports
   import_types(AccountTypes)
+  import_types(CommentTypes)
   import_types(PostTypes)
 
   # Queries imports
@@ -29,6 +32,7 @@ defmodule VulnerableApiWeb.GraphQL.Schema do
 
   # Mutations imports
   import_types(AccountMutations)
+  import_types(CommentMutations)
   import_types(PostMutations)
 
   query do
@@ -38,6 +42,7 @@ defmodule VulnerableApiWeb.GraphQL.Schema do
 
   mutation do
     import_fields(:account_mutations)
+    import_fields(:comment_mutations)
     import_fields(:post_mutations)
   end
 end

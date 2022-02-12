@@ -18,7 +18,7 @@ defmodule VulnerableApi.Comments.Comment do
     timestamps()
   end
 
-  def changeset(post, attrs) do
-    cast(post, attrs, @attrs)
+  def changeset(comment, attrs) do
+    cast(comment, attrs, @attrs)
   end
 end
