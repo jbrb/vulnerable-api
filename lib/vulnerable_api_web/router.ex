@@ -9,7 +9,7 @@ defmodule VulnerableApiWeb.Router do
     # plug Guardian here
   end
 
-  scope "/api", VulnerableApiWeb do
+  scope "/api" do
     pipe_through :api
 
     if Mix.env() == :dev do
