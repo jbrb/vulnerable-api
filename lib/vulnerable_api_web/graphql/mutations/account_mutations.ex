@@ -1,7 +1,7 @@
 defmodule VulnerableApiWeb.GraphQL.Mutations.AccountMutations do
   use Absinthe.Schema.Notation
 
-  alias VulnerableApiWeb.Graphql.Resolvers.AccountResolver
+  alias VulnerableApiWeb.GraphQL.Resolvers.AccountResolver
 
   # alias VulnerableApiWeb.Graphql.Middlewares.AuthorizationMiddleware
 
