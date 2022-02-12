@@ -15,7 +15,6 @@ defmodule VulnerableApi.Repo.Migrations.CreateUsersTable do
       add :credits, :integer
       add :is_private, :boolean, default: false
 
-
       timestamps()
     end
   end
