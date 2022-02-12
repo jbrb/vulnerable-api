@@ -47,7 +47,8 @@ defmodule VulnerableApi.MixProject do
       {:absinthe, "~> 1.6"},
       {:absinthe_plug, "~> 1.5"},
       {:guardian, "~> 2.2"},
-      {:bcrypt_elixir, "~> 3.0"}
+      {:bcrypt_elixir, "~> 3.0"},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 
