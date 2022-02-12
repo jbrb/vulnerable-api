@@ -17,5 +17,7 @@ defmodule VulnerableApi.Repo.Migrations.CreateUsersTable do
 
       timestamps()
     end
+
+    create unique_index(:users, [:email])
   end
 end
