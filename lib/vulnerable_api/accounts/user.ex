@@ -9,7 +9,7 @@ defmodule VulnerableApi.Accounts.User do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
-  @attrs ~w(email full_name address government_id role status is_private password)a
+  @attrs ~w(email full_name address government_id role status is_private password string)a
 
   schema "users" do
     field :email, :string
@@ -21,6 +21,7 @@ defmodule VulnerableApi.Accounts.User do
     field :role, :string
     field :status, :string
     field :is_private, :boolean, default: false
+    field :username, :string
 
     field :password, :string, virtual: true
 
@@ -34,7 +35,7 @@ defmodule VulnerableApi.Accounts.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, @attrs)
-    |> validate_required([:full_name, :address, :email, :password])
+    |> validate_required([:full_name, :address, :email, :password, :string])
     |> hash_password()
   end
 

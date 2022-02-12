@@ -12,6 +12,7 @@ defmodule VulnerableApiWeb.GraphQL.Mutations.AccountMutations do
       arg(:address, non_null(:string))
       arg(:password, non_null(:string))
       arg(:password_confirmation, non_null(:string))
+      arg(:username, non_null(:string))
 
       resolve(&AccountResolver.create_user/2)
     end

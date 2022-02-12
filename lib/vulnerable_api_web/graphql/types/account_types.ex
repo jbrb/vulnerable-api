@@ -11,6 +11,7 @@ defmodule VulnerableApiWeb.GraphQL.Types.AccountTypes do
     field :status, :string
     field :credits, :integer
     field :is_private, :boolean
+    field :username, :string
   end
 
   object :token do
