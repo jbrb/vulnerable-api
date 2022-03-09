@@ -48,7 +48,8 @@ defmodule VulnerableApi.MixProject do
       {:absinthe_plug, "~> 1.5"},
       {:guardian, "~> 2.2"},
       {:bcrypt_elixir, "~> 3.0"},
-      {:cors_plug, "~> 2.0"}
+      {:cors_plug, "~> 2.0"},
+      {:dataloader, "~> 1.0.0"}
     ]
   end
 
