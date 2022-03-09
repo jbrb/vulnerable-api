@@ -11,7 +11,7 @@ defmodule VulnerableApiWeb.GraphQL.Resolvers.AccountResolver do
       user ->
         if Accounts.authenticate(user, args.password) do
           # here we put ttl options to adjust token expiry
-          {:ok, token, _claims} = Guardian.encode_and_sign(user, %{}, ttl: {1, :minute})
+          {:ok, token, _claims} = Guardian.encode_and_sign(user, %{}, ttl: {1, :hour})
           {:ok, %{token: token, user_id: user.id}}
         else
           {:error, %{code: 400, message: "Invalid credentials."}}

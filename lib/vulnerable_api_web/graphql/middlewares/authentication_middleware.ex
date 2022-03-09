@@ -1,9 +1,9 @@
-defmodule VulnerableApiWeb.Graphql.Middlewares.AuthMiddleware do
+defmodule VulnerableApiWeb.Graphql.Middlewares.AuthenticationMiddleware do
   @behaviour Absinthe.Middleware
   alias Absinthe.Resolution
   alias VulnerableApi.Accounts.User
 
-  def call(%{context: %{user: %User{}}} = resolution, _config) do
+  def call(%{context: %{current_user: %User{}}} = resolution, _config) do
     resolution
   end
 

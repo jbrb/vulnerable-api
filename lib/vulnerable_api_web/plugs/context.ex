@@ -1,7 +1,6 @@
 defmodule VulnerableApiWeb.Plugs.Context do
   @behaviour Plug
   import Plug.Conn
-  alias VulnerableApi.Accounts
   alias VulnerableApi.Guardian
 
   def init(opts), do: opts
@@ -22,11 +21,9 @@ defmodule VulnerableApiWeb.Plugs.Context do
 
   defp build_context(conn) do
     with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
-         {:ok, %{"sub" => id}} <- Guardian.decode_and_verify(token) do
-      {:ok,
-       %{
-         user: Accounts.get_user(id)
-       }}
+         {:ok, claims} <- Guardian.decode_and_verify(token) do
+
+      {:ok, %{current_user: Guardian.resource_from_claims(claims)}}
     else
       [] -> %{}
       error -> error
