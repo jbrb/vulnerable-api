@@ -16,6 +16,7 @@ defmodule VulnerableApi.Posts do
     |> join(:left, [_p, c], u in assoc(c, :user))
     |> join(:left, [p], uu in assoc(p, :user))
     |> join(:left, [_, _, u], cc in assoc(u, :credits))
+    |> order_by([desc: :inserted_at])
     |> preload(^preload)
     |> Repo.all()
   end
