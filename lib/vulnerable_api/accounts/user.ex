@@ -9,6 +9,8 @@ defmodule VulnerableApi.Accounts.User do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
+  @password_format ~r/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z]).{12,}$/
+
   @attrs ~w(
     email
     full_name
@@ -19,6 +21,7 @@ defmodule VulnerableApi.Accounts.User do
     is_private
     password
     password_confirmation
+    username
   )a
 
   schema "users" do
@@ -48,6 +51,8 @@ defmodule VulnerableApi.Accounts.User do
     |> cast(attrs, @attrs)
     |> validate_required([:full_name, :address, :email, :password, :password_confirmation])
     |> validate_confirmation(:password)
+    |> validate_length(:password, min: 12)
+    |> validate_format(:password, @password_format)
     |> hash_password()
   end
 

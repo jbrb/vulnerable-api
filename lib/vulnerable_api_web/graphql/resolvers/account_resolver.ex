@@ -1,6 +1,7 @@
 defmodule VulnerableApiWeb.GraphQL.Resolvers.AccountResolver do
   alias VulnerableApi.Accounts
   alias VulnerableApi.Guardian
+  alias VulnerableApi.Utils.ErrorHandler
 
   def login(args, _) do
     case Accounts.get_user_by_email(args.email) do
@@ -9,7 +10,8 @@ defmodule VulnerableApiWeb.GraphQL.Resolvers.AccountResolver do
 
       user ->
         if Accounts.authenticate(user, args.password) do
-          {:ok, token, _claims} = Guardian.encode_and_sign(user, %{})
+          # here we put ttl options to adjust token expiry
+          {:ok, token, _claims} = Guardian.encode_and_sign(user, %{}, ttl: {1, :minute})
           {:ok, %{token: token, user_id: user.id}}
         else
           {:error, %{code: 400, message: "Invalid credentials."}}
@@ -26,7 +28,14 @@ defmodule VulnerableApiWeb.GraphQL.Resolvers.AccountResolver do
   end
 
   def create_user(args, _) do
-    Accounts.create_user(args)
+    case Accounts.create_user(args) do
+      {:ok, user} ->
+        {:ok, user}
+
+      {:error, changeset} ->
+        {:error, %{message: ErrorHandler.format_errors(changeset)}}
+
+    end
   end
 
   def update_user(%{user_id: user_id} = args, _) do
