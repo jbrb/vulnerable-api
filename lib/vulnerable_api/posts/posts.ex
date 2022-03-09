@@ -10,8 +10,10 @@ defmodule VulnerableApi.Posts do
     |> Repo.insert()
   end
 
-  def list_posts do
-    Repo.all(Post)
+  def list_posts(preload \\ []) do
+    Post
+    |> preload(^preload)
+    |> Repo.all()
   end
 
   def list_user_posts(user_id, preload \\ []) do
@@ -30,4 +32,12 @@ defmodule VulnerableApi.Posts do
   end
 
   def delete_post(post), do: Repo.delete(post)
+
+  def data() do
+    Dataloader.Ecto.new(Repo, query: &query/2)
+  end
+
+  def query(queryable, _params) do
+    queryable
+  end
 end

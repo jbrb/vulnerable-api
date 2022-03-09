@@ -4,6 +4,10 @@ defmodule VulnerableApiWeb.GraphQL.Schema do
   """
   use Absinthe.Schema
 
+  alias VulnerableApi.Accounts
+  alias VulnerableApi.Comments
+  alias VulnerableApi.Posts
+
   alias VulnerableApiWeb.GraphQL.Mutations.{
     AccountMutations,
     CommentMutations,
@@ -44,5 +48,19 @@ defmodule VulnerableApiWeb.GraphQL.Schema do
     import_fields(:account_mutations)
     import_fields(:comment_mutations)
     import_fields(:post_mutations)
+  end
+
+  def context(ctx) do
+    loader =
+      Dataloader.new
+      |> Dataloader.add_source(Accounts, Accounts.data())
+      |> Dataloader.add_source(Comments, Comments.data())
+      |> Dataloader.add_source(Posts, Posts.data())
+
+    Map.put(ctx, :loader, loader)
+  end
+
+  def plugins do
+    [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
   end
 end

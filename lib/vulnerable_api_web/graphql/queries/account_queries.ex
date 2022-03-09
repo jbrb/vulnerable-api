@@ -6,6 +6,13 @@ defmodule VulnerableApiWeb.GraphQL.Queries.AccountQueries do
   # alias VulnerableApiWeb.Graphql.Middlewares.AuthorizationMiddleware
 
   object :account_queries do
+    @desc "Get Current User"
+    field :get_current_user, :user do
+      arg(:user_id, :string)
+
+      resolve(&AccountResolver.get_user/2)
+    end
+
     @desc "List Users"
     field :list_users, list_of(:user) do
       resolve(&AccountResolver.list_users/2)

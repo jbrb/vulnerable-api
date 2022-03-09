@@ -1,6 +1,9 @@
 defmodule VulnerableApiWeb.GraphQL.Types.AccountTypes do
   use Absinthe.Schema.Notation
 
+  import Absinthe.Resolution.Helpers, only: [dataloader: 1]
+  alias VulnerableApi.Posts
+
   object :user do
     field :id, :string
     field :email, :string
@@ -12,9 +15,11 @@ defmodule VulnerableApiWeb.GraphQL.Types.AccountTypes do
     field :credits, :integer
     field :is_private, :boolean
     field :username, :string
+    field :posts, list_of(:post), resolve: dataloader(Posts)
   end
 
   object :token do
+    field :user_id, :string
     field :token, :string
   end
 end

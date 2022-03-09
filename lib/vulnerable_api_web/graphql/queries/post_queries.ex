@@ -6,7 +6,7 @@ defmodule VulnerableApiWeb.GraphQL.Queries.PostQueries do
   # alias VulnerableApiWeb.Graphql.Middlewares.AuthorizationMiddleware
 
   object :post_queries do
-    @desc "Create Post"
+    @desc "List Posts"
     field :list_posts, list_of(:post) do
       arg(:user_id, :string)
 

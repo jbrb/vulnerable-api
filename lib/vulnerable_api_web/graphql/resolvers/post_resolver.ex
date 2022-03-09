@@ -5,6 +5,10 @@ defmodule VulnerableApiWeb.GraphQL.Resolvers.PostResolver do
     {:ok, Posts.list_user_posts(user_id, comments: :user)}
   end
 
+  def list_posts(_, _) do
+    {:ok, Posts.list_posts(comments: :user)}
+  end
+
   def create_post(args, _) do
     Posts.create_post(args)
   end

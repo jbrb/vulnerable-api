@@ -10,7 +10,7 @@ defmodule VulnerableApiWeb.GraphQL.Resolvers.AccountResolver do
       user ->
         if Accounts.authenticate(user, args.password) do
           {:ok, token, _claims} = Guardian.encode_and_sign(user, %{})
-          {:ok, %{token: token}}
+          {:ok, %{token: token, user_id: user.id}}
         else
           {:error, %{code: 400, message: "Invalid credentials."}}
         end

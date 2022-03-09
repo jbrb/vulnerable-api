@@ -26,4 +26,12 @@ defmodule VulnerableApi.Comments do
   end
 
   def delete_comment(comment), do: Repo.delete(comment)
+
+  def data() do
+    Dataloader.Ecto.new(Repo, query: &query/2)
+  end
+
+  def query(queryable, _params) do
+    queryable
+  end
 end
