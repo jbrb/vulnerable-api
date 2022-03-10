@@ -6,6 +6,7 @@ defmodule VulnerableApiWeb.Router do
   end
 
   pipeline :graphql do
+    if Mix.env() != :dev, do: plug(VulnerableApiWeb.Plugs.Introspection)
     plug VulnerableApiWeb.Plugs.Context
   end
 
