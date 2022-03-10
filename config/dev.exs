@@ -24,7 +24,7 @@ config :vulnerable_api, VulnerableApi.Guardian,
 config :vulnerable_api, VulnerableApiWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  http: [ip: {127, 0, 0, 1}, port: 4200],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
@@ -64,3 +64,11 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :vulnerable_api, VulnerableApi.Guardian,
+  issuer: "vulnerable_api",
+  secret_key:
+    System.get_env("GUARDIAN_SECRET_KEY") ||
+      "nEal75TIFR4JkHnANyrq3I681kutDXmtFmuedFQumrlrbQ2ZZE4ukqzBXTL7Y2c+"
+
+# ttl: {1, :days}
