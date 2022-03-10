@@ -20,7 +20,7 @@ defmodule VulnerableApi.MixProject do
   def application do
     [
       mod: {VulnerableApi.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ex_rated]
     ]
   end
 
@@ -49,7 +49,8 @@ defmodule VulnerableApi.MixProject do
       {:guardian, "~> 2.2"},
       {:bcrypt_elixir, "~> 3.0"},
       {:cors_plug, "~> 2.0"},
-      {:dataloader, "~> 1.0.0"}
+      {:dataloader, "~> 1.0.0"},
+      {:ex_rated, "~> 2.0"}
     ]
   end
 

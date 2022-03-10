@@ -52,7 +52,7 @@ defmodule VulnerableApiWeb.GraphQL.Schema do
 
   def context(ctx) do
     loader =
-      Dataloader.new
+      Dataloader.new()
       |> Dataloader.add_source(Accounts, Accounts.data())
       |> Dataloader.add_source(Comments, Comments.data())
       |> Dataloader.add_source(Posts, Posts.data())

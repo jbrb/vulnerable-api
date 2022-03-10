@@ -2,7 +2,8 @@ defmodule VulnerableApiWeb.GraphQL.Mutations.AccountMutations do
   use Absinthe.Schema.Notation
 
   alias VulnerableApiWeb.GraphQL.Resolvers.AccountResolver
-  alias VulnerableApiWeb.Graphql.Middlewares.AuthenticationMiddleware
+  alias VulnerableApiWeb.GraphQL.Middlewares.AuthenticationMiddleware
+  alias VulnerableApiWeb.GraphQL.Middlewares.RateLimitMiddleware
 
   object :account_mutations do
     @desc "Sign Up"
@@ -22,6 +23,7 @@ defmodule VulnerableApiWeb.GraphQL.Mutations.AccountMutations do
       arg(:email, non_null(:string))
       arg(:password, non_null(:string))
 
+      middleware(RateLimitMiddleware)
       resolve(&AccountResolver.login/2)
     end
 

@@ -1,8 +1,8 @@
-defmodule VulnerableApiWeb.Graphql.Middlewares.AuthorizationMiddleware do
+defmodule VulnerableApiWeb.GraphQL.Middlewares.AuthorizationMiddleware do
   @behaviour Absinthe.Middleware
   alias Absinthe.Resolution
 
-  def call(%{errors: [%{message: _} | _]} = resolution, _config), do: resolution
+  def call(%{errors: [%{message: _} | _]} = resolution, _any), do: resolution
 
   def call(%{context: %{current_user: user}} = resolution, allowed_roles) do
     if user.role in allowed_roles do
@@ -12,7 +12,7 @@ defmodule VulnerableApiWeb.Graphql.Middlewares.AuthorizationMiddleware do
     end
   end
 
-  def call(resolution, _config), do: return_unauthorized(resolution)
+  def call(resolution, _any), do: return_unauthorized(resolution)
 
   defp return_unauthorized(resolution) do
     Resolution.put_result(

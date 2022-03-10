@@ -22,7 +22,6 @@ defmodule VulnerableApiWeb.Plugs.Context do
   defp build_context(conn) do
     with ["Bearer " <> token] <- get_req_header(conn, "authorization"),
          {:ok, claims} <- Guardian.decode_and_verify(token) do
-
       {:ok, %{current_user: Guardian.resource_from_claims(claims)}}
     else
       [] -> %{}

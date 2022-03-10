@@ -12,7 +12,7 @@ defmodule VulnerableApi.Posts do
 
   def list_posts(preload \\ []) do
     Post
-    |> order_by([desc: :inserted_at])
+    |> order_by(desc: :inserted_at)
     |> preload(^preload)
     |> Repo.all()
   end

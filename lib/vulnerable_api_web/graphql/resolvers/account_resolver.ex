@@ -34,7 +34,6 @@ defmodule VulnerableApiWeb.GraphQL.Resolvers.AccountResolver do
 
       {:error, changeset} ->
         {:error, %{message: ErrorHandler.format_errors(changeset)}}
-
     end
   end
 
