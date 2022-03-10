@@ -27,6 +27,10 @@ defmodule VulnerableApiWeb.GraphQL.Resolvers.AccountResolver do
     {:ok, Accounts.get_user(user_id)}
   end
 
+  def search_user(%{keyword: keyword}, _) do
+    {:ok, Accounts.search_user(keyword)}
+  end
+
   def create_user(args, _) do
     case Accounts.create_user(args) do
       {:ok, user} ->

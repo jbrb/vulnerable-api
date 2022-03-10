@@ -18,6 +18,13 @@ defmodule VulnerableApi.Accounts do
 
   def get_user_by_email(email), do: Repo.get_by(User, email: email)
 
+  def search_user(_keyword) do
+    User
+    # some complex query
+    # |> where([u], fragment("SELECT * FROM user u WHERE u.status = '%#{keyword}%')"))
+    |> Repo.all()
+  end
+
   def update_user(user, attrs) do
     user
     |> User.changeset(attrs)

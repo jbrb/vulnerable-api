@@ -31,5 +31,12 @@ defmodule VulnerableApiWeb.GraphQL.Queries.AccountQueries do
 
       resolve(&AccountResolver.get_user/2)
     end
+
+    @desc "Search User"
+    field :search_user, list_of(:user) do
+      arg(:keyword, non_null(:string))
+
+      resolve(&AccountResolver.search_user/2)
+    end
   end
 end
