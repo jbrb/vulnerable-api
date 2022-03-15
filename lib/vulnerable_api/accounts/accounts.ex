@@ -45,8 +45,19 @@ defmodule VulnerableApi.Accounts do
     Credit
     |> join(:left, [c], u in assoc(c, :user))
     |> where([_c, u], u.id == ^user.id)
-    |> select([c], %{total: sum(c.amount)})
+    |> select([c], %{amount: sum(c.amount)})
     |> Repo.one()
+  end
+
+  def list_user_credits_history(user) do
+    Credit
+    |> where(user_id: ^user.id)
+    |> Repo.all()
+  end
+
+  def send_credits(from, to, amount) do
+    add_credit(from, -amount)
+    add_credit(to, amount)
   end
 
   def data() do

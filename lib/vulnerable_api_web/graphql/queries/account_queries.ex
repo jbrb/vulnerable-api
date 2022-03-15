@@ -38,5 +38,15 @@ defmodule VulnerableApiWeb.GraphQL.Queries.AccountQueries do
 
       resolve(&AccountResolver.search_user/2)
     end
+
+    @desc "List credits"
+    field :list_credits_history, list_of(:credit) do
+      resolve(&AccountResolver.list_credits_history/2)
+    end
+
+    @desc "Get user credits"
+    field :get_user_credits, :credit do
+      resolve(&AccountResolver.get_user_credits/2)
+    end
   end
 end

@@ -61,8 +61,8 @@ defmodule VulnerableApiWeb.GraphQL.Resolvers.AccountResolver do
     end
   end
 
-  def add_credits(args, _) do
-    case Accounts.get_user(args.user_id) do
+  def add_credits(args, %{context: %{current_user: user}}) do
+    case Accounts.get_user(user.id) do
       nil ->
         {:error, %{message: "Not found.", code: 404}}
 
@@ -71,20 +71,33 @@ defmodule VulnerableApiWeb.GraphQL.Resolvers.AccountResolver do
     end
   end
 
-  def send_credits(args, %{context: %{user: user}}) do
-    %{total: sender_credits} = Accounts.get_user_total_credits(user)
+  def send_credits(args, %{context: %{current_user: user}}) do
+    %{amount: sender_credits} = Accounts.get_user_total_credits(user)
 
     if sender_credits >= args.credits do
-      case Accounts.get_user(args.user_id) do
+      case Accounts.get_user_by_email(args.email) do
         nil ->
           {:error, %{message: "Not found.", code: 404}}
 
         receiver ->
-          Accounts.add_credit(user, -args.credits)
-          Accounts.add_credit(receiver, args.credits)
+          Accounts.send_credits(user, receiver, args.credits)
       end
     else
       {:error, %{message: "Not enough credits.", code: 400}}
     end
+  end
+
+  def list_credits_history(_args, %{context: %{current_user: user}}) do
+    {:ok, Accounts.list_user_credits_history(user)}
+  end
+
+  def get_user_credits(_args, %{context: %{current_user: user}}) do
+    credits =
+      case Accounts.get_user_total_credits(user) do
+        %{amount: nil} -> %{amount: 0}
+        credits -> credits
+      end
+
+    {:ok, credits}
   end
 end

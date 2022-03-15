@@ -45,16 +45,15 @@ defmodule VulnerableApiWeb.GraphQL.Mutations.AccountMutations do
     end
 
     @desc "Add Credits"
-    field :add_credits, :user do
-      arg(:user_id, non_null(:string))
+    field :add_credits, :credit do
       arg(:credits, non_null(:integer))
 
       resolve(&AccountResolver.add_credits/2)
     end
 
     @desc "Send credits to user"
-    field :send_credits, :user do
-      arg(:user_id, non_null(:string))
+    field :send_credits, :credit do
+      arg(:email, non_null(:string))
       arg(:credits, non_null(:integer))
 
       middleware(AuthenticationMiddleware)

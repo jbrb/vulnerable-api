@@ -13,11 +13,13 @@ defmodule VulnerableApiWeb.Router do
   scope "/api" do
     pipe_through :api
 
+    pipe_through :graphql
+    post "/send", VulnerableApiWeb.CreditsController, :send_credits
+
     if Mix.env() == :dev do
       forward "/graphiql", Absinthe.Plug.GraphiQL, schema: VulnerableApiWeb.GraphQL.Schema
     end
 
-    pipe_through :graphql
     forward "/graphql", Absinthe.Plug, schema: VulnerableApiWeb.GraphQL.Schema
   end
 
