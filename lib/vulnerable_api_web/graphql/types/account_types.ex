@@ -24,6 +24,7 @@ defmodule VulnerableApiWeb.GraphQL.Types.AccountTypes do
   end
 
   object :credit do
+    field :id, :string
     field :amount, :integer
   end
 end
