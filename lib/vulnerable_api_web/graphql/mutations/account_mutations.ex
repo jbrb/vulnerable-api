@@ -33,6 +33,7 @@ defmodule VulnerableApiWeb.GraphQL.Mutations.AccountMutations do
       arg(:full_name, non_null(:string))
       arg(:address, non_null(:string))
 
+      middleware(AuthenticationMiddleware)
       resolve(&AccountResolver.update_user/2)
     end
 
