@@ -23,7 +23,6 @@ defmodule VulnerableApiWeb.GraphQL.Mutations.AccountMutations do
       arg(:email, non_null(:string))
       arg(:password, non_null(:string))
 
-      middleware(RateLimitMiddleware)
       resolve(&AccountResolver.login/2)
     end
 
