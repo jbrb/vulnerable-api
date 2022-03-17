@@ -24,7 +24,7 @@ defmodule VulnerableApiWeb.GraphQL.Resolvers.PostResolver do
   end
 
   def delete_post(%{post_id: post_id}, _) do
-    case Posts.delete_post(post_id) do
+    case Posts.get_post(post_id) do
       %{id: _} = post ->
         Posts.delete_post(post)
 
