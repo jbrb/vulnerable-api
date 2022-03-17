@@ -6,7 +6,8 @@ params = %{
   address: "Manila",
   email: "admin@mapia.com",
   password: "P@ssw0rd123!",
-  password_confirmation: "P@ssw0rd123!"
+  password_confirmation: "P@ssw0rd123!",
+  role: "admin"
 }
 
 %User{}
