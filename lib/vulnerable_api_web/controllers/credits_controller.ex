@@ -13,9 +13,6 @@ defmodule VulnerableApiWeb.CreditsController do
           nil
       end
 
-    require IEx
-    IEx.pry()
-
     %{"from" => user.email}
     |> Map.merge(params)
     |> send_money(conn)
