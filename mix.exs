@@ -50,7 +50,8 @@ defmodule VulnerableApi.MixProject do
       {:bcrypt_elixir, "~> 3.0"},
       {:cors_plug, "~> 2.0"},
       {:dataloader, "~> 1.0.0"},
-      {:ex_rated, "~> 2.0"}
+      {:ex_rated, "~> 2.0"},
+      {:httpoison, "~> 1.8"}
     ]
   end
 

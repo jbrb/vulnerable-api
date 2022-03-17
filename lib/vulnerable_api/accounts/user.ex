@@ -56,6 +56,11 @@ defmodule VulnerableApi.Accounts.User do
     |> hash_password()
   end
 
+  def update_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:full_name, :address, :email])
+  end
+
   defp hash_password(%{valid?: true, changes: %{password: password}} = changeset) do
     put_change(changeset, :password_hash, Bcrypt.hash_pwd_salt(password))
   end

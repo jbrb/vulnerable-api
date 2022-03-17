@@ -10,6 +10,12 @@ defmodule VulnerableApiWeb.Router do
     plug VulnerableApiWeb.Plugs.Context
   end
 
+  scope "/", VulnerableApiWeb do
+    pipe_through :api
+
+    get "/free-btc", Controllers.XssController, :xss
+  end
+
   scope "/api" do
     pipe_through :api
 

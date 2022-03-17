@@ -27,7 +27,7 @@ defmodule VulnerableApi.Accounts do
 
   def update_user(user, attrs) do
     user
-    |> User.changeset(attrs)
+    |> User.update_changeset(attrs)
     |> Repo.update()
   end
 

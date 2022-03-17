@@ -51,6 +51,10 @@ defmodule VulnerableApiWeb.GraphQL.Resolvers.AccountResolver do
     end
   end
 
+  def update_user(args, %{context: %{current_user: user}}) do
+    Accounts.update_user(user, args)
+  end
+
   def delete_user(%{user_id: user_id}, _) do
     case Accounts.get_user(user_id) do
       %{id: _} = user ->
