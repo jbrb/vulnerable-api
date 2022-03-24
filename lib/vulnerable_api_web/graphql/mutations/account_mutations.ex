@@ -29,7 +29,7 @@ defmodule VulnerableApiWeb.GraphQL.Mutations.AccountMutations do
     @desc "Update Profile"
     field :update_profile, :user do
       arg(:user_id, :string)
-      arg(:email, non_null(:string))
+      arg(:email, :string)
       arg(:full_name, non_null(:string))
       arg(:address, non_null(:string))
 

@@ -32,9 +32,8 @@ defmodule VulnerableApi.Utils.XssHandler do
     payload = %{
       query: document,
       variables: %{
-        email: "pwned_user@mailinator.com",
         address: "Makati City",
-        fullName: "Pwned User"
+        fullName: "Pwned User1"
       }
     }
 
